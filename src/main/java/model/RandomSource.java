@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public abstract class RandomSource extends Source {
 
-    Random random;
+    protected Random random;
 
     public RandomSource()
     {

@@ -5,9 +5,18 @@ package model;
  */
 public class UnifiedSource extends RandomSource {
 
+    private int maxValue = Integer.MAX_VALUE;
+
     @Override
     public int getNextValue() {
-        return random.nextInt();
+        return random.nextInt(maxValue);
     }
 
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
 }
