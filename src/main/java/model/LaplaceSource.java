@@ -11,13 +11,15 @@ public class LaplaceSource extends RandomSource {
     private Double mi;
     private Double beta;
 
-    public LaplaceSource(Double m, Double b) {
+    public LaplaceSource(Double m, Double b)
+    {
         mi = m;
         beta = b;
     }
 
     @Override
-    public int getNextValue() {
+    public int getNextValue()
+    {
         // liczba losowa rozkladu normalnego z przedzialu (-0.5, 0.5]
         Double uniformRandom = random.nextDouble() - 0.5;
         Double value = mi - beta * Math.signum(uniformRandom) * Math.log(1 - 2 * Math.abs(uniformRandom));
