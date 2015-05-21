@@ -26,23 +26,23 @@ public class ExpGolomb {
         //zamiana wartości ujemnych na dodatnie w celu zakodowania ich
         if(intToCode <= 0)
         {
-            intToCode = -2 * intToCode + 1;
+            intToCode = -2 * intToCode + 1; //(-2 * intToCode) + 1 //(rozszerzenie dla ujemnych) + 1
         }
         else
         {
-            intToCode = 2 * intToCode;
+            intToCode = 2 * intToCode; //(2 * intToCode - 1) + 1 //(rozszerzenie dla ujemnych) + 1
         }
 
         //dodanie jedynki w celu rozpoczęcia kodu od słowa '1' dla zera
         String binary = Integer.toBinaryString(intToCode);
         //do prefiksu dopisywane będą zera
-        String prefix = "";
+        StringBuilder prefix = new StringBuilder();
         for(int i = 0; i < binary.length() - 1; ++i)
         {
-            prefix = prefix.concat("0");
+            prefix.append(0);
         }
 
-        return prefix.concat(binary);
+        return prefix.append(binary).toString();
     }
 
     public List<Integer> decode(String codeWord)
