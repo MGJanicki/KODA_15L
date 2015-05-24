@@ -25,7 +25,6 @@ public class ImageSourceTest {
         while (!imageSource.isFinished())
         {
             String codeWord = expGolomb.encode();
-            System.out.println(codeWord);
             encodedSequence = encodedSequence.concat(codeWord);
         }
         List<Integer> decodedSymbols = expGolomb.decode(encodedSequence);
@@ -42,5 +41,7 @@ public class ImageSourceTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/10000));
     }
 }

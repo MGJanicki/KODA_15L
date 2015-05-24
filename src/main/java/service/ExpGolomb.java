@@ -21,8 +21,6 @@ public class ExpGolomb {
     public String encode()
     {
         int intToCode = source.getNextValue();
-        //intToCode *= -1;
-        System.out.println("Int to code: " + intToCode);
         //zamiana wartości ujemnych na dodatnie w celu zakodowania ich
         if(intToCode <= 0)
         {
