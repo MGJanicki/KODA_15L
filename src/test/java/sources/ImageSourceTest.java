@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,12 +30,20 @@ public class ImageSourceTest {
         }
         List<Integer> decodedSymbols = expGolomb.decode(encodedSequence);
 
+        List<Integer> imageOutputBuffer = new ArrayList<>();
+        int previousValue = 0;
+        for(Integer i : decodedSymbols)
+        {
+            imageOutputBuffer.add(i + previousValue);
+            previousValue = i + previousValue;
+        }
+
         File result = new File("result.jpg");
         BufferedImage bufferedImage = new BufferedImage(100, 100, 5);
-        for(int i = 0; i < decodedSymbols.size(); ++i){
+        for(int i = 0; i < imageOutputBuffer.size(); ++i){
             int x = i % 100;
             int y = (int) Math.floor((double) i / 100);
-            bufferedImage.setRGB(x, y, decodedSymbols.get(i));
+            bufferedImage.setRGB(x, y, imageOutputBuffer.get(i));
         }
         try {
             ImageIO.write(bufferedImage, "jpg", result);
