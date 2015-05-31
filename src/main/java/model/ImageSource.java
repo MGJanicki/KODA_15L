@@ -10,12 +10,12 @@ import java.io.IOException;
  */
 public class ImageSource extends Source {
 
-    private BufferedImage img;
-    private int width;
-    private int height;
-    private int currentPosition;
-    private boolean finished;
-    private int previousValue;
+    protected BufferedImage img;
+    protected int width;
+    protected int height;
+    protected int currentPosition;
+    protected boolean finished;
+    protected int previousValue;
 
     public ImageSource(String path) {
         try {
@@ -33,13 +33,7 @@ public class ImageSource extends Source {
     @Override
     public int getNextValue() {
         if (!finished) {
-            int x = currentPosition % width;
-            int y = (int) Math.floor((double) currentPosition / width);
-            currentPosition++;
-            if (currentPosition == width * height) {
-                finished = true;
-            }
-            int currentValue = img.getRGB(x, y);
+            int currentValue = getNextSymbol();
             int result = currentValue - previousValue;
             previousValue = currentValue;
             return result;
@@ -47,6 +41,17 @@ public class ImageSource extends Source {
             return 0;
         }
 
+    }
+
+    protected int getNextSymbol()
+    {
+        int x = currentPosition % width;
+        int y = (int) Math.floor((double) currentPosition / width);
+        currentPosition++;
+        if (currentPosition == width * height) {
+            finished = true;
+        }
+        return img.getRGB(x, y);
     }
 
     public boolean isFinished() {

@@ -17,7 +17,7 @@ public class UnifiedSourceTest {
         String encodedSequence = "";
         ExpGolomb expGolomb = new ExpGolomb(new UnifiedSource());
         ((UnifiedSource)expGolomb.getSource()).setMaxValue(255);
-        ((UnifiedSource)expGolomb.getSource()).setMinValue(-256);
+        ((UnifiedSource)expGolomb.getSource()).setMinValue(-255);
 
         for(int i = 0; i < 10000; ++i) //10000 symboli jak w obrazku
         {
