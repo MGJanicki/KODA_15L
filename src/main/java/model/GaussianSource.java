@@ -15,10 +15,10 @@ public class GaussianSource extends RandomSource {
 
     @Override
     public int getNextValue() {
-        //Jesli X ~ N(mi,sigma^2) , oraz a, b , s¹ liczbami rzeczywistymi,
+        //Jesli X ~ N(mi,sigma^2) , oraz a, b , sï¿½ liczbami rzeczywistymi,
         // to aX + b ~ N(a*mi + b, (a*sigma)^2)
-        //wiec a=sqrt(sigma) i b=mi
-        return (int)((Math.sqrt(standardDeviation) * random.nextGaussian()) + meanValue);
+        //wiec a=sigma i b=mi
+        return (int)(standardDeviation * random.nextGaussian() + meanValue);
     }
 
 }

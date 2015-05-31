@@ -16,7 +16,7 @@ public class LaplacianSourceTest {
     public void laplacianSourceTest()
     {
         String encodedSequence = "";
-        ExpGolomb expGolomb = new ExpGolomb(new LaplaceSource(0.0, 128.0)); //wydaje mi się, że w ten sposób powinniśmy dostać większość wartości z zakresu [-256, 256]
+        ExpGolomb expGolomb = new ExpGolomb(new LaplaceSource(0.0, 80.0));
 
         for(int i = 0; i < 10000; ++i)
         {
@@ -26,7 +26,14 @@ public class LaplacianSourceTest {
         List<Integer> decodedSymbols = expGolomb.decode(encodedSequence);
         System.out.println(decodedSymbols);
 
+        int counter = 0;
+        for(Integer symbol: decodedSymbols)
+        {
+            if(symbol < -255 || symbol > 255) counter++;
+        }
+
         System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/10000));
+        System.out.println("% wartosci spoza przedziału <-255, 255> " + (double)counter/100);
     }
 
 }
