@@ -16,18 +16,23 @@ import java.util.List;
  */
 public class ImageSourceTest {
 
-    //TODO: dodac kodowanie roznicowe
     @Test
-    public void miniboyTest(){
-        ImageSource imageSource = new ImageSource("miniboy.jpg");
+    public void minibouTest(){
+        imgageTest("miniboy.jpg");
+    }
+
+    private void imgageTest(String filename){
+        ImageSource imageSource = new ImageSource(filename);
         String encodedSequence = "";
         ExpGolomb expGolomb = new ExpGolomb(imageSource);
 
+        long startTime = System.currentTimeMillis();
         while (!imageSource.isFinished())
         {
             String codeWord = expGolomb.encode();
             encodedSequence = encodedSequence.concat(codeWord);
         }
+        long encodingTime = System.currentTimeMillis();
         List<Integer> decodedSymbols = expGolomb.decode(encodedSequence);
 
         List<Integer> imageOutputBuffer = new ArrayList<>();
@@ -37,8 +42,9 @@ public class ImageSourceTest {
             imageOutputBuffer.add(i + previousValue);
             previousValue = i + previousValue;
         }
+        long decodingTime = System.currentTimeMillis();
 
-        File result = new File("result.jpg");
+        File result = new File(filename.split("\\.")[0] + "_result.jpg");
         BufferedImage bufferedImage = new BufferedImage(100, 100, 5);
         for(int i = 0; i < imageOutputBuffer.size(); ++i){
             int x = i % 100;
@@ -52,5 +58,7 @@ public class ImageSourceTest {
         }
 
         System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/10000));
+        System.out.println("Czas kodowania: " + (encodingTime - startTime));
+        System.out.println("Czas dekodowania: " + (decodingTime - encodingTime));
     }
 }

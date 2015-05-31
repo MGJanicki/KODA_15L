@@ -63,4 +63,12 @@ public class ImageSource extends Source {
         currentPosition = 0;
     }
 
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
 }
