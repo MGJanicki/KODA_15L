@@ -83,7 +83,7 @@ public class MonochromaticImageSourceTest {
             e.printStackTrace();
         }
 
-        System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/10000));
+        System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/(imageSource.getWidth() * imageSource.getHeight())));
         System.out.println("Czas kodowania: " + (encodingTime - startTime));
         System.out.println("Czas dekodowania: " + (decodingTime - encodingTime));
     }

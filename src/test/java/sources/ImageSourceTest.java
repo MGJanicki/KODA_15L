@@ -45,10 +45,10 @@ public class ImageSourceTest {
         long decodingTime = System.currentTimeMillis();
 
         File result = new File(filename.split("\\.")[0] + "_result.jpg");
-        BufferedImage bufferedImage = new BufferedImage(100, 100, 5);
+        BufferedImage bufferedImage = new BufferedImage(imageSource.getWidth(), imageSource.getHeight(), 5);
         for(int i = 0; i < imageOutputBuffer.size(); ++i){
-            int x = i % 100;
-            int y = (int) Math.floor((double) i / 100);
+            int x = i % imageSource.getWidth();
+            int y = (int) Math.floor((double) i / imageSource.getHeight());
             bufferedImage.setRGB(x, y, imageOutputBuffer.get(i));
         }
         try {
@@ -57,7 +57,7 @@ public class ImageSourceTest {
             e.printStackTrace();
         }
 
-        System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/10000));
+        System.out.println("Średnia długość zakodowanego symbolu to " + ((double)encodedSequence.length()/(imageSource.getWidth() * imageSource.getHeight())));
         System.out.println("Czas kodowania: " + (encodingTime - startTime));
         System.out.println("Czas dekodowania: " + (decodingTime - encodingTime));
     }
